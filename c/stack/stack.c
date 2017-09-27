@@ -18,7 +18,7 @@ char pop(Pilha* p){ //"remove" o elemento mais externo da pilha e o retorna
 }
 
 void push(Pilha *p, char c){
-	if((*p).topo <= 99){ //se a pilha nao estiver cheia (visto que comecamos nosso indice de 0 e o MAX definido foi 100)
+	if((*p).topo < MAX){ //se a pilha nao estiver cheia (visto que comecamos nosso indice de 0 e o MAX definido foi 100)
 		p -> topo++; //aumentamos o topo em uma unidade
 		(*p).elementos[(*p).topo] = c; //guardamos o elemento dado como sendo o novo topo
 	}else{
@@ -29,6 +29,6 @@ void push(Pilha *p, char c){
 
 int isEmpty(Pilha p) {return p.topo == -1;} //verifica se esta vazia a partir do topo
 
-int isFull(Pilha p) {return p.topo == 99;} //verifica se esta vazia a partir do topo
+int isFull(Pilha p) {return p.topo == (MAX-1);} //verifica se esta vazia a partir do topo
 
 int size(Pilha p) {return p.topo + 1;} //retorna o tamanho da pilha somando um para representar a quantidade de itens
