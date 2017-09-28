@@ -70,6 +70,12 @@ void RD(Arvore *r) {
 /* Rotacao a esquerda */
 void RE(Arvore *r) {
 /*** COMPLETE AQUI ***/
+	No* p = *r;
+	No* q = p->dir;
+	p->dir = q->esq;
+	q->esq = p;
+	*r = q;
+	return;
 }
 
 /* Rotacao Dupla EsqDir */
@@ -88,6 +94,14 @@ void RED(Arvore *r) {
 /* Rotacao Dupla DirEsq */
 void RDE(Arvore *r) {
 /*** COMPLETE AQUI ***/
+	No* p = *r;
+	No* q = p->dir;
+	No* t = q->esq;
+	q->esq = t->dir;
+	t->dir = q;
+	p->dir = t;
+	RD(r);
+	return;
 }
 
 /* Funcao auxiliar de insercao */
