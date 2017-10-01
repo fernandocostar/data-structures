@@ -41,15 +41,14 @@ void ImprimeArvore(Arvore r, int b) {
 	return;
 }
 
-/* Retorna a altura total da arvore */
+/* Retorna a altura total da arvore dada */
 int Altura(Arvore r) {
-/*** COMPLETE AQUI ***/
 	int tesq, tdir; //variaveis para o tamanho da subarvore esquerda e direita, respectivamente
 	if(!r){ //se for NULL retorna -1
 		return -1;
 	}
-	tdir = Altura(r->dir)+1 //chama recursivamente a altura da subarvore da direita
-	tesq = Altura(r->esq)+1 //chama recursivamente a altura da subarvore da esquerda
+	tdir = Altura(r->dir)+1; //chama recursivamente a altura da subarvore da direita
+	tesq = Altura(r->esq)+1; //chama recursivamente a altura da subarvore da esquerda
 	if(tdir > tesq){ //retorna tamanho da direita caso seja maior
 		return tdir;
 	}
@@ -69,7 +68,6 @@ void RD(Arvore *r) {
 
 /* Rotacao a esquerda */
 void RE(Arvore *r) {
-/*** COMPLETE AQUI ***/
 	No* p = *r;
 	No* q = p->dir;
 	p->dir = q->esq;
@@ -93,14 +91,14 @@ void RED(Arvore *r) {
 
 /* Rotacao Dupla DirEsq */
 void RDE(Arvore *r) {
-/*** COMPLETE AQUI ***/
-	No* p = *r;
-	No* q = p->dir;
-	No* t = q->esq;
+	No* p = *r; //criamos um ponteiro auxiliar que aponta para o mesmo local onde a arvore esta apontando
+	No* q = p->dir; //criamos um ponteiro auxiliar que aponta para o filho direito da raiz da nossa arvore
+	No* t = q->esq; //criamos um ponteiro auxiliar que aponta para o filho esquerdo da raiz da primeira subarvore
 	q->esq = t->dir;
+	p->dir = t->esq;
 	t->dir = q;
-	p->dir = t;
-	RD(r);
+	t->esq = p;
+	*r = t;
 	return;
 }
 
@@ -129,7 +127,7 @@ int InsereAux(Arvore *r, int k, int *cresceu) {
 							RD(r);
 							(*r)->dir->bal = 0;
 						}
-						else { 
+						else {
 							RED(r);
 							No *e = (*r)->esq, *d = (*r)->dir;
 							switch ((*r)->bal) {
@@ -158,7 +156,48 @@ int InsereAux(Arvore *r, int k, int *cresceu) {
 			return 0;
 	}
 	if (k > (*r)->chave) {
-/*** COMPLETE AQUI ***/
+		if(InsereAux(&(*r)->dir, k, cresceu)){ //se k for maior que a chave da raiz chamamos recursivamente para a subarvore da direita
+			if(*cresceu){ //se o noh foi adicionado na arvore
+				switch ((*r)->bal){
+					case -1:
+						(*r)->bal = 0;
+						*cresceu = 0;
+						break;
+					case 0:
+						(*r)->bal = 1;
+						break;
+					case +1:
+						if((*r)->dir->bal == 1){
+							RE(r);
+							(*r)->esq->bal = 0;
+						}else{
+							RDE(r);
+							No* e = (*r)->esq;
+							No* d = (*r)->dir;
+							switch ((*r)->bal){
+								case -1:
+									e->bal = 0;
+									d->bal = 1;
+									break;
+								case 0:
+								e->bal = 0;
+								d->bal = 0;
+								break;
+								case 1:
+									d->bal = 0;
+									e->bal = -1;
+								break;
+							}
+						}
+					(*r)->bal = 0;
+					*cresceu = 0;
+					break;
+				}
+			}
+			return 1;
+		}
+		else
+			return 0;
 	}
 }
 
