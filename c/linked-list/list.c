@@ -1,10 +1,11 @@
 #include "list.h"
-
+//creates a list//
 List create(){
 	List l = NULL; //To create an empty list we create a pointer to a NULL node
 	return l;
 }
 
+//destroys the list//
 void free_list(List* l){
 	No* n = *l; //copy the node that the list points to
 	while(n != NULL){
@@ -15,12 +16,17 @@ void free_list(List* l){
 	return;
 }
 
+//insert a data in an specific index in a list//
 void insert(List* l, int d, int i){
-	No* new_node = (No*)malloc(sizeof(No));
-	new_node->data = d;
+	No* new_node = (No*)malloc(sizeof(No)); //create a new node
+	new_node->data = d; //store the data
 
-	No* n = *l;
+	No* n = *l; //copy the first element adress
 	int count = 0;
+
+	if(!(*l)){
+		printf("Empty.\n");
+	}
 
 	if(i == 0){
 		insert_left(l, d);
@@ -44,6 +50,7 @@ void insert(List* l, int d, int i){
 	exit(-1);
 }
 
+//inserts a data on the left of the list//
 void insert_left(List* l, int d){
 	No* new_node = (No*)malloc(sizeof(No));
 	new_node->data = d;
@@ -60,6 +67,7 @@ void insert_left(List* l, int d){
 	return;
 }
 
+//inserts a data on the rigth of the list//
 void insert_right(List* l, int d){
 	No* new_node = (No*)malloc(sizeof(No));
 	new_node->data = d;
@@ -78,6 +86,7 @@ void insert_right(List* l, int d){
 	return;
 }
 
+//removes and returns the data at an index//
 int remove(List* l, int i){
 	int data, counter = 0;
 	No* aux = (*l);
@@ -110,6 +119,7 @@ int remove(List* l, int i){
 	return data;
 }
 
+//removes and returns the data at the start of the list//
 int remove_left(List* l){
 	int data;
 	No* aux = (*l);
@@ -132,6 +142,7 @@ int remove_left(List* l){
 	return data;
 }
 
+//removes and returns the data on the list right side//
 int remove_rigth(List* l){
 	int data;
 	if(!(*l)){
@@ -156,6 +167,7 @@ int remove_rigth(List* l){
 	return data;
 }
 
+//returns the size of the list//
 int size(List l){
 	No* aux = l;
 	int count;
@@ -170,6 +182,20 @@ int size(List l){
 	return count;
 }
 
+//returns if the list is empty//
 int isEmpty(List l){
 	return l == NULL;
+}
+
+//prints the full list//
+void print_list(List l){
+	if(!l){
+		printf("Empty.\n");
+	}
+	No* aux = l;
+	while(aux){
+		print(aux->data);
+	}
+	printf("\n");
+	return;
 }

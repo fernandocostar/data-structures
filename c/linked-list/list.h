@@ -20,5 +20,5 @@ void remove(List* l, int i);
 int size(List l);
 int isEmpty(List l);
 void sort(List* l);
-
+void print_list(List l);
 #endif
