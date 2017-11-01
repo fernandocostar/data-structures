@@ -13,6 +13,8 @@ typedef struct heap{
 
 void insereValor(Heap *h, int n);
 int minValor(Heap h);
+int remove(Heap *h);
+int removeMin(Heap *h);
 void criaHeap(Heap *h);
 void imprimeHeap(Heap h);
 

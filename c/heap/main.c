@@ -18,6 +18,11 @@ int main(){
 			case 'P':
 				imprimeHeap(h);
 				break;
+			case 'R':
+				scanf("%d", &k);
+				printf("%d\n", remove(&h, k));
+			case '?':
+				printf("%d\n", removeMin(&h));
 		}
 		scanf(" %c", &op);
 	}
