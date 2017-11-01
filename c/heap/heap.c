@@ -6,7 +6,7 @@
 #define FILHO_DIR(i) (2*i + 1)
 
 void criaHeap(Heap *h){ //O(1)
-	//cria heap definindo seu ultimo elemento no indice 0 do vetor
+	//cria heap definindo tamanho 0
 	h->tamanho = 0;
 	return;
 }
