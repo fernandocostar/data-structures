@@ -18,7 +18,7 @@ void insereValor(Heap *h, int n){
 	altura = h->tamanho;
 	h->array[altura] = n;
 	//sobe checkando se as subheaps estão oks
-	while(altura){
+	while(altura != 1){
 		if(h->array[altura] < h->array[altura/2]){
 			aux = h->array[altura];
 			h->array[altura] = h->array[altura/2];
@@ -36,7 +36,7 @@ int minValor(Heap h){
 }
 
 void imprimeHeap(Heap h){
-	if(!h.tamanho){
+	if(h.tamanho){
 		int i;
 		printf("%d", h.array[1]);
 		for(i = 2; i <= h.tamanho; i++){
