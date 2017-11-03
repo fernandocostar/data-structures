@@ -12,17 +12,19 @@ int main(){
 				scanf("%d", &k);
 				insereValor(&h, k);
 				break;
-			case 'M':
-				printf("%d\n", minValor(h));
+			case 'T':
+				printf("Valor do topo: %d\n", minValor(h));
 				break;
 			case 'P':
 				imprimeHeap(h);
 				break;
 			case 'R':
 				scanf("%d", &k);
-				printf("%d\n", remove(&h, k));
-			case '?':
-				printf("%d\n", removeMin(&h));
+				printf("Removido: %d\n", removeAt(&h, k));
+				break;
+			case 'M':
+				printf("Minimo removido: %d\n", removeMin(&h));
+				break;
 		}
 		scanf(" %c", &op);
 	}
