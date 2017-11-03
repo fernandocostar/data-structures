@@ -40,7 +40,7 @@ int minValor(Heap h){ //O(1)
 	return h.tamanho ? h.array[1] : -1;
 }
 
-int remove(Heap *h, int i){ //O(log n)
+int removeAt(Heap *h, int i){ //O(log n)
 	//retorna -1 se estiver vazia ou nao existir o indice requisitado
 	if(!h->tamanho || i > h->tamanho) return -1;
 
@@ -50,7 +50,7 @@ int remove(Heap *h, int i){ //O(log n)
 	h->tamanho--;
 	//desce trocando o atual pelo menor filho para manter a propriedade de heap
 	while(h->array[i] > h->array[FILHO_DIR(i)] || h->array[i] > FILHO_DIR(i)){
-		if(h->array[FILHO_DIR(i)] <= h->array[FILHO_ESQ(i)]){
+		if(h->array[FILHO_DIR(i)] < h->array[FILHO_ESQ(i)]){
 			aux = h->array[FILHO_DIR(i)];
 			h->array[FILHO_DIR(i)] = h->array[i];
 			h->array[i] = aux;
@@ -65,7 +65,7 @@ int remove(Heap *h, int i){ //O(log n)
 
 int removeMin(Heap *h){ //O(1)
 	//chama o remove na posicao 1, menor valor da minHeap
-	return remove(h, 1);
+	return removeAt(h, 1);
 }
 
 void imprimeHeap(Heap h){ //O(n)
@@ -81,4 +81,3 @@ void imprimeHeap(Heap h){ //O(n)
 	printf("\n");
 	return;
 }
-
